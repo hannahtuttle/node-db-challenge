@@ -12,7 +12,7 @@ exports.up = function(knex) {
       tbl.string('notes');
       tbl.boolean('completed');
       tbl.integer('project_id')
-      .unsigned().notNullable().reference('id').inTable('projects')
+      .unsigned().notNullable().references('id').inTable('projects')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
   })
@@ -21,7 +21,7 @@ exports.up = function(knex) {
       tbl.string('resource_name', 500).notNullable();
       tbl.string('resource_description', 1000);
       tbl.integer('project_id')
-      .unsigned().notNullable().reference('id').inTable('projects')
+      .unsigned().notNullable().references('id').inTable('projects')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
   })

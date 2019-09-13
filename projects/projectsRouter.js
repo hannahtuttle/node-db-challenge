@@ -5,7 +5,12 @@ const router = express.Router()
 router.get('/', (req, res) => {
     data.getProjects()
     .then(proj => {
-        res.status(200).json(proj)
+       const convert =  proj.map(pro => {
+        Object.defineProperty(pro, "completed", {value:(pro.completed === 1)? true:false})
+           //(pro.completed === 1)? true:false
+           return pro
+       })
+        res.status(200).json(convert)
     })
     .catch(err => {
         res.status(500).json(err)
@@ -16,7 +21,11 @@ router.get('/:id', (req, res) => {
     const id = req.params.id
     data.findById(id)
     .then(proj => {
-        res.status(200).json(proj)
+        const convert =  proj.map(pro => {
+            Object.defineProperty(pro, "completed", {value:(pro.completed === 1)? true:false})
+               //(pro.completed === 1)? true:false
+               return pro })
+        res.status(200).json(convert)
     })
     .catch(err => {
         res.status(500).json(err)
@@ -38,7 +47,12 @@ router.get('/:id/tasks', (req, res) => {
     const id = req.params.id
     data.getTasks(id)
     .then(task => {
-        res.status(200).json(task)
+        const convert =  task.map(t => {
+            Object.defineProperty(t, "completed", {value:(t.completed === 1)? true:false})
+               //(pro.completed === 1)? true:false
+               return t
+           })
+        res.status(200).json(convert)
     })
     .catch(err => {
         res.status(500).json(err)
